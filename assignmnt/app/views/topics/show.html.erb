@@ -1,0 +1,35 @@
+<div id="notice"><%= notice %></div>
+
+<div>
+  <b>Title:</b>
+  <%= @topic.title %>
+</div>
+
+<div>
+  <b>Name:</b>
+  <%= @topic.name %>
+</div>
+
+<div>
+  <b>Description:</b>
+  <%= @topic.description %>
+</div>
+
+<div>
+  <b>Tags:</b>
+  <%= @topic.associated_tags %>
+</div>
+
+
+<div id="comment_div_on_topic">
+<% if @comments.present? %>
+  <%= render :partial => "comments/index", :locals => {:comments => @comments} %>
+  <% end %>
+</div>
+<% if can? :create , Comment%>
+	<div id="comment-form">
+	    <%= render :partial => "comments/form", :locals => {:comment => @comment} %>
+	</div>
+<% else %>
+  <div><%= link_to 'for new comment sign_in/signup', new_user_registration_path(:req_type => 'new_comment') %></div>
+<% end %>

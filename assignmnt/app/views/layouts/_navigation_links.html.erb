@@ -1,0 +1,24 @@
+<div class="menu"><%= link_to 'Home', root_path, class: 'navbar-brand' %></div>
+<% if user_signed_in? %>
+  <div class='menu'><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></div>
+  <% if can? :manage, Tag%>
+	  <div class='menu'><%= link_to 'Tags', tags_path %></div>
+  <% end %>
+<% else %>
+  <div class='menu'><%= link_to 'Sign in', new_user_session_path %></div>  
+  <div class='menu'><%= link_to 'Sign up', new_user_registration_path %></div>
+<% end %>
+<% if user_signed_in? %>	
+<div ><%= link_to current_user.email, edit_user_registration_path %></div> 
+<% end %>
+
+
+<style>
+div.menu
+{
+	width:80px !important;
+	display:inline;
+	float:right;
+
+}
+</style>

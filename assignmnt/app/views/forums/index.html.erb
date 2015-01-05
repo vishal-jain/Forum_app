@@ -1,0 +1,37 @@
+<h1>Listing forums</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @forums.each do |forum| %>
+  <tr>
+    <td><%= link_to forum.name, forum%></td>
+    <td><%= forum.address %></td>
+    <td><%= forum.email %></td>
+    <td><%= link_to 'Topics',forum_topics_path(forum)%></td>    
+    <%if can? :edit, forum%>
+      <td><%= link_to 'Edit', edit_forum_path(forum) %></td>
+    <% else %>
+      <td>-</td>
+    <% end %>
+    <%if can? :edit, forum%>
+      <td><%= link_to 'Destroy', forum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% else %>
+      <td>-</td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%if can? :create, Forum%>
+  <%= link_to 'New Forum', new_forum_path %>
+<% end %>

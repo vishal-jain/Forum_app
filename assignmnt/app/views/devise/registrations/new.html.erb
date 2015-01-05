@@ -1,0 +1,44 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+  	<br />
+   	<div><label><input id="chkb_is_forum" type='checkbox'/> Is Forum user</label>
+	<br/>
+ 	</div>
+
+  <br/>
+  <div><%= f.select :forum_id, Forum.all.collect{|f| [f.name , f.id]}, :prompt => "Select forum", :required => true , :label => false, :input_html => {:class => 'col-xs-10 col-sm-5 forum-dropdown', :required => true}%></div><br/>
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+<script>
+
+
+	if (("#chkb_is_forum").checked)
+		$("#user_forum_id").css("display","block");
+	else
+		$("#user_forum_id").css("display","none");
+
+
+$("#chkb_is_forum").click(function()
+{
+
+	if (this.checked)
+		$("#user_forum_id").css("display","block");
+	else
+		$("#user_forum_id").css("display","none");
+});
+
+</script>

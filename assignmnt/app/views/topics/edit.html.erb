@@ -1,0 +1,43 @@
+<h2>Edit topic</h2>
+
+<%= form_for (@topic) , :url =>  "/forums/#{@forum.permalink}/topics/#{@topic.permalink}", :method => "put" do |f| %>
+  <% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <ul>
+      <% @topic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  
+   <div class="field ">
+    <%= f.label :Tags %><br />
+    <% Tag.all.each do |t| -%>
+    <div>
+      <%= check_box_tag(:tag_ids, t.id, @topic.tags.include?(t), :name => 'topic[tag_ids][]') -%>
+      <%= label_tag(:tag_ids, t.name, :class => "radio inline") -%>
+    </div>
+    <% end %>
+   </div>
+
+   <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
