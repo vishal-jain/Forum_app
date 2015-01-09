@@ -3,6 +3,12 @@ Assignmnt::Application.routes.draw do
   
 
 
+  # resources :students
+
+
+  resources :addresses
+
+  resources :students
   resources :tags
 
 

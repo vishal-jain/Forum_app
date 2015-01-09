@@ -5,7 +5,8 @@ class Forum < ActiveRecord::Base
 
   has_many :topics, :dependent => :destroy
   has_one :user
-
+  has_one :shipping_address
+  has_one :billing_address
   def to_param
   	permalink.present? ? permalink : "created_at.strftime('%y%m%d%H%L')}_#{name}".parameterize.underscore.dasherize
   end

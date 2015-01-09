@@ -12,11 +12,16 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: assignmnt_development1
+  database: forum_development
   pool: 5
   username: root
   password: 
-  socket: /var/run/mysqld/mysqld.sock
+  socket:  <%= ["/tmp/mysqld.sock" ,
+                 "/tmp/mysql.sock" ,
+                 "/var/run/mysqld/mysqld.sock" ,
+                 "/var/lib/mysql/mysql.sock" ].detect{|socket|
+                   File.exist?(socket)
+                 } %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,20 +30,30 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: assignmnt_test
+  database: forum_test
   pool: 5
   username: root
   password: 
-  socket: /var/run/mysqld/mysqld.sock
+  socket:  <%= ["/tmp/mysqld.sock" ,
+                 "/tmp/mysql.sock" ,
+                 "/var/run/mysqld/mysqld.sock" ,
+                 "/var/lib/mysql/mysql.sock" ].detect{|socket|
+                   File.exist?(socket)
+                 } %>
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: assignmnt_production
+  database: forum_production
   pool: 5
   username: root
-  socket: /var/run/mysqld/mysqld.sock
+  socket:  <%= ["/tmp/mysqld.sock" ,
+                 "/tmp/mysql.sock" ,
+                 "/var/run/mysqld/mysqld.sock" ,
+                 "/var/lib/mysql/mysql.sock" ].detect{|socket|
+                   File.exist?(socket)
+                 } %>
   password: 
 
 
